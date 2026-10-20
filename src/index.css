@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --ground: 241 243 234;
+    --panel: 227 233 219;
+    --ink: 31 58 45;
+    --mute: 79 104 88;
+    --rule: 31 58 45;
+    --wood: 142 99 56;
+  }
+  .dark {
+    --ground: 11 20 15;
+    --panel: 19 33 26;
+    --ink: 233 238 228;
+    --mute: 165 184 169;
+    --rule: 233 238 228;
+    --wood: 217 164 107;
+  }
+
+  html { scroll-behavior: smooth; color-scheme: light; }
+  html.dark { color-scheme: dark; }
+  body {
+    @apply bg-ground font-sans font-normal text-ink antialiased;
+    transition: background-color 0.8s ease, color 0.8s ease;
+  }
+  ::selection { background: rgb(var(--wood) / 0.35); }
+  :focus-visible { outline: 2px solid rgb(var(--wood)); outline-offset: 3px; border-radius: 8px; }
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: rgb(var(--ground)); }
+  ::-webkit-scrollbar-thumb { background: rgb(var(--ink) / 0.25); border-radius: 10px; }
+  h1, h2, h3 { text-wrap: balance; }
+}
+
+@keyframes drift {
+  from { transform: scale(1.12); }
+  to { transform: scale(1); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .animate-drift { animation: drift 24s cubic-bezier(0.22, 1, 0.36, 1) both; }
+}
+
+@keyframes beam {
+  from { transform: translateX(-45%); }
+  to { transform: translateX(45%); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .animate-beam { animation: beam 16s ease-in-out infinite alternate; }
+}
